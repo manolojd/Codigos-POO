@@ -1,0 +1,14 @@
+public class Recados {
+    private String recados;
+
+    public String getRecados() {
+        return recados;
+    }
+
+    public void setRecados(String recados) {
+        this.recados = recados;
+    }
+
+   
+    
+}
