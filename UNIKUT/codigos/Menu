@@ -1,0 +1,219 @@
+import java.util.Scanner;
+
+public class Menu {
+    public static void menu(){
+    System.out.println("Digite o que deseja fazer");
+        System.out.println("1 - Criar Conta");
+        System.out.println("2 - Fazer login");
+        System.out.println("3 - Sair");
+    }
+
+    public static void main(String[] args) {
+        Conta conta = new Conta();
+        Amigos pessoas = new Amigos();
+        Recados recados = new Recados();
+        String [] sistema = new String[1000];
+        String [] amigos = new String[1000];
+        String resposta = null;
+        String msg  =  null;
+        String loginAmigo = null;
+        int opcao, op,opc;
+        Scanner s = new Scanner(System.in);
+
+        System.out.println("Bem vindo");
+        menu();
+        System.out.print("->");
+        opcao = s.nextInt();
+
+        while (opcao != 3) {
+            switch (opcao) {
+                case 1:
+                    System.out.println("Digite seu login: ");
+                    String log;
+                    log = s.nextLine();
+                    while(log.equals(conta.getLogin())){
+                        System.out.println("Este login já existe");
+                        log = s.nextLine();
+                    }
+                    conta.setLogin(log);
+                    System.out.println("Digite sua senha: ");
+                    String sen;
+                    sen = s.nextLine();
+                     while(sen.equals(conta.getSenha())){
+                        System.out.println("Esta senha já existe");
+                        sen = s.nextLine();
+                    }
+                    conta.setSenha(sen);
+                    System.out.println("Digite seu nome de usuário");
+                    String nom;
+                    nom = s.nextLine();
+                    while(nom.equals(conta.getNome())){
+                        System.out.println("Este nome já existe");
+                        nom = s.nextLine();
+                    }
+                    if(nom.equals("")){
+                        nom = "convidado";
+                    }
+                    conta.setNome(nom);
+                    System.out.println(conta);
+                    for(int i = 0; i < sistema.length; i++){
+                        sistema[i]=conta.getLogin();
+                    }
+                    break;
+                case 2:
+                    System.out.println(" login: ");
+                    String login;
+                    login = s.nextLine();
+                    while(login.equals(conta.getLogin())){
+                        System.out.println("Este login já existe");
+                        login = s.nextLine();
+                    }
+                    System.out.println("senha: ");
+                    String senha;
+                    senha = s.nextLine();
+                    while(senha.equals(conta.getSenha())){
+                        System.out.println("Esta senha já existe");
+                        senha = s.nextLine();
+                    }
+                    System.out.println("Digite o que deseja fazer: ");
+                    System.out.println("1 - Editar perfil");
+                    System.out.println("2 - Adicionar Amigo");
+                    System.out.println("3 - Enviar recado");
+                    System.out.println("4 - Sair");
+                    op = s.nextInt();
+                    while (op != 4) {
+                    switch (op) {
+                        case 1:
+                            System.out.println("Digite sua senha: ");
+                            String Novasen;
+                            Novasen = s.nextLine();
+                            while(Novasen.equals(conta.getSenha())){
+                                System.out.println("Esta senha já existe");
+                                Novasen = s.nextLine();
+                    }
+                            conta.setSenha(Novasen);
+                            System.out.println("Digite seu nome de usuário");
+                            String Novonom;
+                            Novonom = s.nextLine();
+                            while(Novonom.equals(conta.getNome())){
+                                System.out.println("Este nome já existe");
+                                Novonom = s.nextLine();
+                    }
+                            if(Novonom.equals("")){
+                                Novonom = "convidado";
+                            }
+                            conta.setNome(Novonom);
+                            System.out.println(conta);
+                            break;
+                        case 2:
+                            System.out.println(" Digite o login do"
+                                    + " possível amigo: ");
+                            loginAmigo = s.nextLine();
+                             for (int i = 0; i < sistema.length; i++){
+                                     if(loginAmigo.equals(sistema)){
+                                         System.out.println("Deseja enviar "
+                                                 + "pedido de amizade? "
+                                                 + "S ou N ");
+                                         String resp = s.nextLine();
+                                         if(resp.equals('S')){
+                                             resp = resposta;
+                                             System.out.println("Pedido de "
+                                                     + "amizade efetuado");
+                                         }
+                                         else if(resp.equals('N')){
+                                             System.out.println("Pedido "
+                                                     + "cancelado");
+                                         }
+                                     }
+                                     else{
+                                         System.out.println("Esta pessoa não "
+                                                 + "existe");
+                                     }
+                             }
+                            break;
+                        case 3:
+                            System.out.println("Digite o que deseja fazer: ");
+                            System.out.println("1 - Abrir caixa de mensagens");
+                            System.out.println("2 - enviar mensagens");
+                            System.out.println("3 - Bloco de notas");
+                            System.out.println("4 - Sair");
+                            opc = s.nextInt();
+                            while (opc != 4) {
+                                switch (opc) {
+                                    case 1:
+                                        if(resposta.equals('S')){
+                                            System.out.println("Você tem um pedido "
+                                                    + "de amizade pendente, "
+                                                    + "aceitar? S ou N  ");
+                                            String r = s.nextLine();
+                                            if(r.equals('S')){
+                                                System.out.println("Você tem"
+                                                        + "um novo amigo");
+                                                pessoas.setLogin(loginAmigo);
+                                                for(int j = 0; j < amigos.length; j++){
+                                                    amigos[j]= pessoas.getLogin();
+                                                    System.out.println(pessoas);
+                                                }
+                                            }
+                                            else if(r.equals('N')){
+                                                System.out.println("Pedido de "
+                                                        + "amizade recusado");
+                                            }
+                                        }
+                                        if(msg!=null){
+                                            System.out.println("Você tem uma "
+                                                    + "nova mensagem!");
+                                            System.out.println(msg);   
+                                        }
+                                        break;
+                                        default:
+                                            System.out.println("Ainda não "
+                                                    + "implementado");
+                                            break;
+                                        case 2:
+                                            System.out.println("Digite o nome do "
+                                                    + "usuário que receberá sua "
+                                                    + "mensagem: ");
+                                            String user = s.nextLine();
+                                            for (int i = 0; i < sistema.length; i++){
+                                                if(user.equals(sistema)){
+                                                    System.out.println("Digite a"
+                                                            + " mensgaem: ");
+                                                    String mensage = s.nextLine();
+                                                    mensage = msg;
+                                                }
+                                                else{
+                                         System.out.println("Esta pessoa não "
+                                                 + "existe");
+                                                }
+                                            }
+                                        case 3:
+                                            System.out.println("Digite suas anotações: ");
+                                            String note = s.nextLine();
+                                            System.out.println(note);
+                                            recados.setRecados(note);
+                                            
+                                }
+                            }
+                            break;
+                    default:
+                    System.out.println("Ainda não implementado");
+                    break;
+                    }
+                    menu();
+                    System.out.print("->");
+                    opcao = s.nextInt();
+                    }
+                    System.out.println("Adeus");
+                    break;
+                default:
+                    System.out.println("Ainda não implementado");
+                    break;
+            }
+            menu();
+            System.out.print("->");
+            opcao = s.nextInt();
+        }
+        System.out.println("Adeus");
+    }
+}
