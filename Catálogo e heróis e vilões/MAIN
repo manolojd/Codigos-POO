@@ -1,0 +1,162 @@
+package marvel;
+
+import java.util.Scanner;
+
+public class Marvel {
+
+    
+    public static int encontrarPosicao(int numID, int[] numIDS, int ultimoIndice){
+        for (int i = 0; i < ultimoIndice; i++) {
+            if (numID == numIDS[i]){
+                return i;
+            }
+        }
+        return -1;
+    }
+
+    public static void menu(){
+        System.out.println("Olá, bem vindo(a) ao cadastro de heróis"
+                + " e vilões da MCU! Digite o que deseja fazer");
+        System.out.println("1 - Para incluir um personagem");
+        System.out.println("2 - Para remover um persongem");
+        System.out.println("3 - Para listar todos os personagens");
+        System.out.println("4 - Para consultar um personagem");
+        System.out.println("5 - Para Listar por classe");
+        System.out.println("6 - Para saber se este personagem sobrerviveu ao "
+                + "estalo do Thanos");
+        System.out.println("7 - para Sair");
+    }
+
+    public static void main(String[] args) {
+        int opcao;
+        String nome;
+        int num, ano;
+        String classe;
+        String poder;
+        boolean estalo;
+        Scanner h = new Scanner(System.in);
+        int ultimoIndice = 0;
+        
+        int [] numID = new int[1000];
+        String [] nomeID = new String[1000];
+        int [] anoPersona = new int[1000];
+        String [] classePersona = new String[1000];
+        String [] poderPersona = new String[1000];
+        boolean [] estalada = new boolean[1000];
+
+        /*numID[ultimoIndice] = 1;
+        nomeID[ultimoIndice] = "Babayaga";
+        anoPersona[ultimoIndice] = 1973;
+        classePersona[ultimoIndice] = "Vilão";
+        poderPersona[ultimoIndice] = "Transmutação";
+        estalada[ultimoIndice]= true;
+        ultimoIndice++;*/
+
+        System.out.println("Iniciando protocolo...");
+        menu();
+        System.out.print("->");
+        opcao = h.nextInt();
+        while (opcao != 7) {
+            switch (opcao) {
+                case 1:
+                    ultimoIndice = adicionaPersona( h,  ultimoIndice,  numID,
+             nomeID,  classePersona,anoPersona,  poderPersona, estalada);
+                    break;
+                case 2:
+                    System.out.println("Digite o numero do(a) personagem a ser removido(a)");
+                    num = h.nextInt();
+                    int indice = encontrarPosicao(num, numID, ultimoIndice);
+                    if (indice != -1){
+                        for (int i = indice; i < ultimoIndice; i++) {
+                            numID[i] = numID[i+1];
+                            nomeID[i] = nomeID[i+1];
+                            classePersona[i] = classePersona[i+1];
+                            anoPersona[i] = anoPersona[i+1];
+                            poderPersona[i] = poderPersona[i+1];
+                        }
+                        ultimoIndice--;
+                    } else{
+                        System.out.println("Personagem não encontrado(a)");
+                    }
+                    break;
+                case 3:
+                    System.out.println("Lista de Personagens");
+                    for (int i = 0; i < ultimoIndice; i++) {
+                        System.out.printf("O personagem: %s de numero %d tem poder de %.2f "
+                                + "\n", nomeID[i], numID[i], poderPersona[i]);
+                    }
+                    break;
+                    case 4:
+                    System.out.println("Consultar Personagen");
+                    System.out.println("Digite o número deste personagem");
+                    int numero = h.nextInt();
+                    for (int i = 0; i < ultimoIndice; i++) {
+                        if(numero == ultimoIndice){
+                        System.out.printf("O personagem: %s de numero %d tem poder de %.2f "
+                                + "\n", nomeID[i], numID[i], poderPersona[i]);
+                        }
+                    }
+                    break;
+                    case 5:
+                    System.out.println("Lista de Personagens por classe");
+                    System.out.println("Digite a classe do personagem");
+                    String CLASSE = h.nextLine();
+                               	 for (int i = 0; i < classePersona.length; i++){
+                                     if(CLASSE.equals(classePersona)){
+                        System.out.printf("O personagem: %s de numero %d tem poder de %.2f "
+                                + "\n", nomeID[i], numID[i], poderPersona[i]);
+                        }
+                                 }
+                    break;
+                    case 6:
+                    System.out.println("Lista de Personagens que foram apagados pelo Thanos");
+                    for (int i = 0; i < ultimoIndice; i++) {
+                        if(estalo = true){
+                        System.out.printf("Este personagem foi apagado pelo Thanos");
+                    }
+                    }
+                    break;
+                default:
+                    System.out.println("Personagem ainda não implementado(a)");
+                    break;
+            }
+            menu();
+            System.out.print("->");
+            opcao = h.nextInt();
+        }
+        System.out.println("Obrigado, e até a próxima!");
+    }
+
+    private static int adicionaPersona(Scanner h, int ultimoIndice, int[] numID,
+            String[] nomeID, String[] classePersona,
+            int[] anoPersona, String[] poderPersona, boolean[] estalada) {
+        String nome;
+        String classe;
+        int num;
+        int ano;
+        boolean estalo;
+        String poder;
+        System.out.println("Digite o numero do(a) personagem");
+        num = h.nextInt();
+        System.out.println("Digite o nome do(a) personagem");
+        nome = h.nextLine();
+        System.out.println("Digite a classe do(a) personagem");
+        classe = h.nextLine();
+        System.out.println("Digite o ano de criação do(a) personagem");
+        ano = h.nextInt();
+        System.out.println("Digite o poder do(a) personagem");
+        poder = h.nextLine();
+        System.out.println("Este(a) personagem foi apagado(a) pelo Thanos? true ou false?");
+        estalo = h.nextBoolean();
+        System.out.printf("\nO personagem %s tem o poder de %.2f \n\n", nome, poder);
+
+        numID[ultimoIndice] = num;
+        nomeID[ultimoIndice] = nome;
+        classePersona[ultimoIndice] = classe;
+        anoPersona[ultimoIndice] = ano;
+        poderPersona[ultimoIndice] = poder;
+        estalada[ultimoIndice] = estalo;
+        ultimoIndice ++;
+        return ultimoIndice;
+    }
+}
